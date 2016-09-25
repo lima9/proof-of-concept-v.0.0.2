@@ -5,6 +5,7 @@ var io = require('socket.io');              /*Comunicación entre Master y Slave
 
 /*Inicio Express*/
 var app = express();
+var server = require('http').Server(app);
 
 /*Middlewares express*/
 app.use(bodyParser.json());
@@ -18,4 +19,9 @@ require('mongoose-middleware').initialize(mongoose);
 mongoose.connect('mongodb://localhost/cp2', function(err, res) {
     if (err) throw err;
     console.log('Conectado con éxito a la Base de Datos');
+});
+
+// Start server
+server.listen(3005, function() {
+    console.log("Servidor en http://localhost:3005/");
 });
